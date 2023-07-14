@@ -9,26 +9,39 @@
   </head>
   <body>
     <main>
-      <h1>Rock, Paper, Scissors</h1>
-      <section id="rounds">
+      <h1>Schere, Stein, Papier</h1>
+      <section class="rounds">
         <h2>Rounds</h2>
-        <input type="radio" name="rounds" value="5" checked> 5
-        <input type="radio" name="rounds" value="3"> 3
-        <input type="radio" name="rounds" value="5"> 5
+        <div class="radioselection">
+          <input type="radio" class="roundselection" value="5" checked> 5
+          <input type="radio" class="roundselection" value="10"> 10
+          <input type="radio" class="roundselection" value="15"> 15
+          <input type="radio" class="roundselection" value="20"> 20
+        </div>
       </section>
-      <section id="game">
+      <section class="game section">
         <h2>Game</h2>
-        <button id="rock">Rock</button>
-        <button id="paper">Paper</button>
-        <button id="scissors">Scissors</button>
+        <div class="gamebuttons">
+          <button class="buttons" value="schere">✂️</button>
+          <button class="buttons" value="stein">🪨</button>
+          <button class="buttons" value="papier">🧻</button>
+        </div>
       </section>
-      <section id="score">
+      <section class="score_box">
         <h2>Score</h2>
-        <p><span id="user-score">0</span></p>:
-        <p><span id="computer-score">0</span></p>
+        <div class="punkteanzeige">
+          <p>
+            <span class="userpunkte">0</span>
+          </p>:
+          <p>
+            <span class="computerpunkte">0</span>
+          </p>
+        </div>
       </section>
-      <button id="reset">Reset</button>
-      <div id="winner"></div>
+      <div class ="usertake"> </div>
+      <div class="computertake"> </div>
+      <div class="winner"></div>
+      <button class="reset">Reset</button>
     </main>
   </body>
 </html>

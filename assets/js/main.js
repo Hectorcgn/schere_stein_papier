@@ -1,82 +1,77 @@
+"use strict";
+/*
+Aufgabenstellung:
 
-// Buttons, Runden, Punkte, Reset-Button und Gewinner-Element auswählen
-const buttons = document.querySelectorAll('#game button');
-const rounds = document.querySelectorAll('#rounds input');
-const userScore = document.querySelector('#user-score');
-const computerScore = document.querySelector('#computer-score');
-const resetButton = document.querySelector('#reset');
-const winnerDiv = document.querySelector('#winner');
+Jeder hat in seinem Leben schon einmal "Rock, Paper, Scissors" (Schnick, Schnack, Schnuck) gespielt. 
+Ihr kennt die Regeln also bereits. ;) 
 
-// Punktestand initialisieren
-let userPoints = 0;
-let computerPoints = 0;
+Definiere, wie viele Runden ein User gegen den Computer spielen wird.
 
-// Funktion, um eine Runde zu spielen
-function playRound(userSelection) {
-    const choices = ['rock', 'paper', 'scissors'];
-    const computerSelection = choices[Math.floor(Math.random() * choices.length)];
+Die Farbe sollte sich ändern, wenn es sich um einen Gewinn, ein Unentschieden oder eine Niederlage handelt.
 
-    if (userSelection === computerSelection) {
-        return 'tie';
-    } else if (
-    (userSelection === 'rock' && computerSelection === 'scissors') ||
-    (userSelection === 'paper' && computerSelection === 'rock') ||
-    (userSelection === 'scissors' && computerSelection === 'paper')
-    ) {
-    return 'win';
-        } else {
-        return 'lose';
-        }
-    }
+Das Design im Anhang ist nur ein Vorschlag, ihr könnt hier gerne kreativ werden. ;) 
 
-// Funktion, um den Punktestand zu aktualisieren
-function updateScore(result) {
-    if (result === 'win') {
-    userPoints++;
-    userScore.textContent = userPoints;
-    userScore.classList.add('win');
-    computerScore.classList.add('lose');
-    } else if (result === 'lose') {
-    computerPoints++;
-    computerScore.textContent = computerPoints;
-    userScore.classList.add('lose');
-    computerScore.classList.add('win');
-    } else {
-    userScore.classList.add('tie');
-    computerScore.classList.add('tie');
-    }
+*/
+//inputs aus dem html
+const roundselection = document.body.querySelectorAll('.roundselection')
+console.log(roundselection);
+const buttons = document.body.querySelectorAll('.buttons')
+
+//outputs aus dem html
+const userpunkte = document.body.querySelector('.userpunkte')
+const computerpunkte = document.body.querySelector('.computerpunkte')
+const winneroutput = document.body.querySelector('.winner')
+const usertakeoutput = document.body.querySelector('.usertake')
+const computertakeoutput = document.body.querySelector('.computertake')
+
+
+//variable für den punktestand
+let userPunkte = 0;
+console.log('userpunkte:',userPunkte);
+let computerPunkte = 0;
+console.log('computerpunkte:',computerPunkte);
+
+//funktion zum zählen der siege und niederlagen
+function updatePunktestand() {
+    userpunkte.textContent = `${userPunkte}`;
+    computerpunkte.textContent = `${computerPunkte}`;
 }
 
-// Funktion, um das Spiel zurückzusetzen
-function resetGame() {
-    userPoints = 0;
-    computerPoints = 0;
-    userScore.textContent = userPoints;
-    computerScore.textContent = computerPoints;
-    userScore.classList.remove('win', 'lose', 'tie');
-    computerScore.classList.remove('win', 'lose', 'tie');
-    winnerDiv.textContent = '';
-}
-
-// Funktion, um den Gewinner zu überprüfen
-function checkWinner() {
-    if (userPoints >= Number(document.querySelector('input[name="rounds"]:checked').value)) {
-    winnerDiv.textContent = 'You won the game!';
-    resetGame();
-    } else if (computerPoints >= Number(document.querySelector('input[name="rounds"]:checked').value)) {
-    winnerDiv.textContent = 'You lost the game!';
-    resetGame();
-    }
-}
-
-// Eventlistener für die Buttons hinzufügen
+//button funktion /userauswahl
 buttons.forEach(button => {
     button.addEventListener('click', () => {
-    const result = playRound(button.id);
-    updateScore(result);
-    checkWinner();
+        const userauswahl = button.textContent;
+        usertakeoutput.textContent = `Du hast ${userauswahl} ausgewählt`;
+        const computertake = computerauswahl();
+        computertakeoutput.textContent =`Der Computer hat ${computertake} ausgewählt`
+        const ergebniss = spielfunction(userauswahl, computertake);
+        winneroutput.textContent = ergebniss; 
+        console.log(ergebniss);
+        updatePunktestand()
     });
 });
 
-// Eventlistener für den Reset-Button hinzufügen
-resetButton.addEventListener('click', resetGame);
+//comp auswahl funktion /computerauswahl
+function computerauswahl() {
+    const auswahl = ['✂️','🪨','🧻'];
+    const randomtake = Math.floor(Math.random() * 3);
+    const computertsymbol = auswahl[randomtake];
+    return computertsymbol;
+}
+
+//spielfunction
+function spielfunction(userauswahl, computertake) {
+    if (userauswahl === computertake) {
+        return 'unentschieden';
+    } else if (
+        (userauswahl === '🪨' && computertake === '✂️') ||
+        (userauswahl === '🧻' && computertake === '🪨') ||
+        (userauswahl === '✂️' && computertake === '🧻')
+    ) {
+        userPunkte ++;
+        return 'Du hast gewonnen';
+    } else {
+        computerPunkte ++;
+        return 'Computer hat gewonnen'; 
+    }
+}
