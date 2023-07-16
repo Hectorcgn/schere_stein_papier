@@ -8,9 +8,18 @@ sass --watch ./assets/scss:./assets/css
 
 
 $headline: maintheme;
-
 $text_r: textregular;
-
+.roundselection{
+    display: flex;
+    column-gap: 30px;
+    justify-content: center;
+    label:hover{
+        cursor: pointer;
+    }
+    input:hover{
+        cursor: pointer;
+    }
+}
 .buttons{
     width: 100px;
     height: 100px;
@@ -80,7 +89,56 @@ $text_r: textregular;
     display: flex;
     justify-content: center;
 }
+@media screen and (max-width: 820px) { 
+    body{
+        background-position: -800px;
+        main{
+            h1{
+                font-size: 60px;
+            }
+            section{
+                h2{
+                    margin-bottom: 10px;
+                }
+                width: 90%;
+            }
+            .roundselection{
+                label{
+                    font-size: 40px;
+                }
+                input{
+                    width: 30px;
+                }
+            }
+            .gamebuttons{
+                display: flex;
+                justify-content: center;
+                column-gap: 50px;
+            }
+            .score_box{
+                p{
+                    font-size: 40px;
+                }
+                .punkteanzeige{
+                    font-size: 40px;
+                }
+            }
+            .verlauf{
+                margin-top: 50px;
+                display: flex;
+                flex-direction: column;
+                font-size: 30px;
+                height: 100px;
+            }
+            .reset{
+                margin-top: 50px;
+                font-size: 30px;
+            }
 
+        }
+    }
+    
+}
 
 @media screen and (max-width: 414px) {
     body{
@@ -96,12 +154,12 @@ $text_r: textregular;
             }
             .roundselection{
                 display: flex;
-                justify-content: space-evenly;
+                column-gap: 10px;
                 label{
                     font-size: 30px;
                 }
                 input[type=radio]{
-                    width: 30px;
+                    width: 25px;
                 }
             }
             h2{

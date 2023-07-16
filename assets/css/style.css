@@ -46,6 +46,19 @@ body main section {
 befehl ürs terminal
 sass --watch ./assets/scss:./assets/css
 */
+.roundselection {
+  display: flex;
+  -moz-column-gap: 30px;
+       column-gap: 30px;
+  justify-content: center;
+}
+.roundselection label:hover {
+  cursor: pointer;
+}
+.roundselection input:hover {
+  cursor: pointer;
+}
+
 .buttons {
   width: 100px;
   height: 100px;
@@ -115,6 +128,49 @@ sass --watch ./assets/scss:./assets/css
   justify-content: center;
 }
 
+@media screen and (max-width: 820px) {
+  body {
+    background-position: -800px;
+  }
+  body main h1 {
+    font-size: 60px;
+  }
+  body main section {
+    width: 90%;
+  }
+  body main section h2 {
+    margin-bottom: 10px;
+  }
+  body main .roundselection label {
+    font-size: 40px;
+  }
+  body main .roundselection input {
+    width: 30px;
+  }
+  body main .gamebuttons {
+    display: flex;
+    justify-content: center;
+    -moz-column-gap: 50px;
+         column-gap: 50px;
+  }
+  body main .score_box p {
+    font-size: 40px;
+  }
+  body main .score_box .punkteanzeige {
+    font-size: 40px;
+  }
+  body main .verlauf {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    font-size: 30px;
+    height: 100px;
+  }
+  body main .reset {
+    margin-top: 50px;
+    font-size: 30px;
+  }
+}
 @media screen and (max-width: 414px) {
   body {
     background-position: -700px 0px;
@@ -131,13 +187,14 @@ sass --watch ./assets/scss:./assets/css
   }
   body main .roundselection {
     display: flex;
-    justify-content: space-evenly;
+    -moz-column-gap: 10px;
+         column-gap: 10px;
   }
   body main .roundselection label {
     font-size: 30px;
   }
   body main .roundselection input[type=radio] {
-    width: 30px;
+    width: 25px;
   }
   body main h2 {
     padding-bottom: 20px;
