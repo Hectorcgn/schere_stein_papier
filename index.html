@@ -3,24 +3,28 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Schere, stein, papier</title>
     <link rel="stylesheet" href="./assets/css/style.css">
     <script defer src="./assets/js/main.js"></script>
   </head>
   <body>
     <main>
-      <h1>Schere, Stein, Papier</h1>
+      <h1>Schere Stein Papier</h1>
       <section class="rounds">
-        <h2>Rounds</h2>
-        <div class="radioselection">
-          <input type="radio" class="roundselection" value="5" checked> 5
-          <input type="radio" class="roundselection" value="10"> 10
-          <input type="radio" class="roundselection" value="15"> 15
-          <input type="radio" class="roundselection" value="20"> 20
+        <h2>Runde</h2>
+        <div class="roundselection">
+          <label for="five">5</label>
+          <input type="radio" id="five" name="round" value="5">
+          <label for="ten">10</label>
+          <input type="radio" id="ten" name="round" value="10">
+          <label for="fiveteen">15</label>
+          <input type="radio" id="fiveteen" name="round" value="15"> 
+          <label for="twenty">20</label>
+          <input type="radio" id="twenty" name="round" value="20"> 
         </div>
       </section>
       <section class="game section">
-        <h2>Game</h2>
+        <h2>Spiel</h2>
         <div class="gamebuttons">
           <button class="buttons" value="schere">✂️</button>
           <button class="buttons" value="stein">🪨</button>
@@ -28,20 +32,25 @@
         </div>
       </section>
       <section class="score_box">
-        <h2>Score</h2>
+        <div class="relativbox">
+          <p class="du">Du</p>
+          <h2>Punktestand</h2>
+          <p class="gegner">Gegner</p>
+        </div>
         <div class="punkteanzeige">
-          <p>
+          <div>
             <span class="userpunkte">0</span>
-          </p>:
-          <p>
-            <span class="computerpunkte">0</span>
-          </p>
+            <p>:</p>
+            <span class="computerpunkte">0</span> 
+          </div>
         </div>
       </section>
-      <div class ="usertake"> </div>
-      <div class="computertake"> </div>
+      <div class="verlauf">
+        <div class ="usertake"> </div>
+        <div class="computertake"> </div>
+      </div>
       <div class="winner"></div>
-      <button class="reset">Reset</button>
+      <button class="reset">Neustart</button>
     </main>
   </body>
 </html>

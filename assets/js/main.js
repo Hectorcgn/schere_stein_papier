@@ -13,65 +13,101 @@ Das Design im Anhang ist nur ein Vorschlag, ihr könnt hier gerne kreativ werden
 
 */
 //inputs aus dem html
-const roundselection = document.body.querySelectorAll('.roundselection')
+const roundselection = document.body.querySelectorAll('[name="round"]');
 console.log(roundselection);
 const buttons = document.body.querySelectorAll('.buttons')
+const gameResetButton = document.body.querySelector('.reset')
 
 //outputs aus dem html
-const userpunkte = document.body.querySelector('.userpunkte')
-const computerpunkte = document.body.querySelector('.computerpunkte')
-const winneroutput = document.body.querySelector('.winner')
-const usertakeoutput = document.body.querySelector('.usertake')
-const computertakeoutput = document.body.querySelector('.computertake')
+const userPunkte = document.body.querySelector('.userpunkte')
+const computerPunkte = document.body.querySelector('.computerpunkte')
+const winnerOutput = document.body.querySelector('.winner')
+const userTakeOutput = document.body.querySelector('.usertake')
+const computerTakeOutput = document.body.querySelector('.computertake')
 
 
 //variable für den punktestand
-let userPunkte = 0;
+let userPunktestand = 0;
 console.log('userpunkte:',userPunkte);
-let computerPunkte = 0;
+let computerPunktestand = 0;
 console.log('computerpunkte:',computerPunkte);
 
-//funktion zum zählen der siege und niederlagen
-function updatePunktestand() {
-    userpunkte.textContent = `${userPunkte}`;
-    computerpunkte.textContent = `${computerPunkte}`;
-}
+// variable für die runden anzahl
+let maxRunden = 0;
 
-//button funktion /userauswahl
-buttons.forEach(button => {
-    button.addEventListener('click', () => {
-        const userauswahl = button.textContent;
-        usertakeoutput.textContent = `Du hast ${userauswahl} ausgewählt`;
-        const computertake = computerauswahl();
-        computertakeoutput.textContent =`Der Computer hat ${computertake} ausgewählt`
-        const ergebniss = spielfunction(userauswahl, computertake);
-        winneroutput.textContent = ergebniss; 
-        console.log(ergebniss);
-        updatePunktestand()
+// function zum Begrenzen der Rundenanzahl
+roundselection.forEach(round => {
+    round.addEventListener('click', () => {
+    maxRunden = parseInt(round.value);
     });
-});
-
-//comp auswahl funktion /computerauswahl
-function computerauswahl() {
-    const auswahl = ['✂️','🪨','🧻'];
-    const randomtake = Math.floor(Math.random() * 3);
-    const computertsymbol = auswahl[randomtake];
-    return computertsymbol;
-}
+    });
+    
 
 //spielfunction
 function spielfunction(userauswahl, computertake) {
+    if (userPunktestand + computerPunktestand === maxRunden) {
+    buttons.forEach(button => {
+    button.disabled = true;
+    });
+    return 'das Spiel zu ende es ist';
+    }
     if (userauswahl === computertake) {
-        return 'unentschieden';
+        return 'der Sieg ungewiss er ist';
     } else if (
         (userauswahl === '🪨' && computertake === '✂️') ||
         (userauswahl === '🧻' && computertake === '🪨') ||
         (userauswahl === '✂️' && computertake === '🧻')
-    ) {
-        userPunkte ++;
-        return 'Du hast gewonnen';
-    } else {
-        computerPunkte ++;
-        return 'Computer hat gewonnen'; 
+        ) {
+            userPunktestand ++;
+            return 'gewonnen du hast';
+        } else {
+            computerPunktestand ++;
+            return 'verloren du hast'; 
+        }
     }
-}
+//button funktion /userauswahl
+    buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            if (maxRunden === 0) {
+                winnerOutput.textContent = 'Die Anzahl der Runden du wählen musst !';
+                return;
+                }
+            const userauswahl = button.textContent;
+            userTakeOutput.textContent = `${userauswahl} gewählt du hast`;
+            const computertake = computerauswahl();
+            computerTakeOutput.textContent =`${computertake} gewählt der Gegner hat`
+            const ergebniss = spielfunction(userauswahl, computertake);
+            winnerOutput.textContent = ergebniss; 
+            updatePunktestand()
+        });
+    });
+    
+//comp auswahl funktion /computerauswahl
+    function computerauswahl() {
+        const auswahl = ['✂️','🪨','🧻'];
+        const randomtake = Math.floor(Math.random() * 3);
+        const computertsymbol = auswahl[randomtake];
+        return computertsymbol;
+    }
+//funktion zum zählen der siege und niederlagen und ausgeben des ergebnisses in das html
+    function updatePunktestand() {
+        userPunkte.textContent = `${userPunktestand}`;
+        computerPunkte.textContent = `${computerPunktestand}`;
+    }
+//function zum zurücksetzen des spiels
+function gameResetButtonFunction() {
+    userPunktestand = 0;
+    computerPunktestand = 0;
+    maxRunden = 0;
+    buttons.forEach(button => {
+    button.disabled = false;
+    });
+    winnerOutput.textContent = '';
+    userTakeOutput.textContent = '';
+    computerTakeOutput.textContent ='';
+    updatePunktestand();
+    }
+//gameResetButton 
+gameResetButton.addEventListener('click', () => {
+    gameResetButtonFunction();
+    });

@@ -1,16 +1,45 @@
 //=====================================
 // globale settings
 //=====================================
+@font-face {
+    font-family: maintheme;
+    src: url(../fonts/Starjhol.ttf);
+}
+$headline: maintheme;
+@font-face {
+    font-family: textregular;
+    src: url(../fonts/Starjedi.ttf);
+}
+$text_r: textregular;
+
 body{
-    font-family: Arial, Helvetica, sans-serif;
+    background-image: url(../img/Yoda_in_de_High_Cuncil.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    font-family: $text_r, sans-serif;
+    text-shadow:1px 1px 10px #FFE81F;
     padding: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     text-align: center;
+    font-size: 20px;
+    main{
+        h1{
+            font-family: $headline, sans-serif;
+            color: #FFE81F;
+            text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.8);
+        }
+        section {
+            background-color: rgba(53, 104, 45, 0.5);
+            width: 50%;
+            margin-top: 10px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 20px;border-radius: 20px;
+            box-shadow:0px 0px 5px 0px #FFE81F;
+        }
+
+    }
 }
-section {
-    border: 1px solid #000;
-    margin: 10px;
-}
-.punkteanzeige{
-    display: flex;
-    justify-content: center;
-}
+
